@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#101215">
+<title>Treino 5×</title>
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAADAElEQVR4nO3dMWoVURiG4VGsRYQI7sLaxkawkYAbsXIZVm5ECDaCjY21uxCSzhW4Ad9z/9GbMcLztPPdk8B5mUuq3Hv0+GKD37n/r38B7i5xkMRBEgdJHCRxkMRBEgdJHCRxkMRBEgdJHCRxkMRBEgdJHCRxkMRBEgdJHCRxkMRBEgdJHCRxkMRBEgdJHCRxkMRBEgdJHCRxkMRBEgdJHCRxkMRBEgdJHCRxkMRBEgdJHCRxkMRBEgdJHCRxkMRBEgdJHKQHR/6wb0+frAfPf1wPj7p482k9uPn4enLO9w8368Gzt6P/nvnw/eV68PPd1eScbds+f/m6Hrx6+WJ41F867s1xsozhZhuUMdycLGO4OVnGcLMNyhhuzuKgOIa3PllObn2ynNz6ZDm89clyfuvH9HFEHPMyTu7nZaz38zLW+3kZJ/d77/uAPm49jr1lLD61t4z61N4y6lN7y1h86s9u+rb78NcKSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRykOxrH8x/X5zrq5uPrs5zz7O3FWc75+e7qLOds2/bq5YtzHfVbtx6Ha5647Wv+M0e8Ofb2sdjv7aP2e/uo/d4+Fvu9fRzQ00FfK/M+Ti7nfayX8z7Wy3kfJ5fz+z7mTXPv0ePzvGMnvj19sni66wVz8ebT4uk8oO8fbhZP5wE9fH+5eLrrBfP5y9fF0yO/gA6Ng//LHf1rhbtAHCRxkMRBEgdJHCRxkMRBEgdJHCRxkMRBEgdJHCRxkMRBEgdJHCRxkMRBEgdJHCRxkMRBEgdJHCRxkMRBEgdJHCRxkMRBEgdJHCRxkMRBEgdJHCRxkMRBEgdJHCRxkMRBEgfpFwoniQFP4c+XAAAAAElFTkSuQmCC">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Treino">
+<style>
+  :root{
+    --bg:#101215;
+    --surface:#191C21;
+    --surface-2:#1F232A;
+    --line:#282C33;
+    --text:#F2F4F7;
+    --muted:#98A0AC;
+    --d1:#D62B2B;
+    --d2:#2563C9;
+    --d3:#E0A400;
+    --d4:#1E9E63;
+    --d5:#C9CED6;
+    --dg:#7A828F;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    font-size:16px;
+    line-height:1.45;
+  }
+  .wrap{max-width:560px;margin:0 auto;padding:0 16px 64px}
+
+  header{padding:24px 0 14px}
+  h1{
+    font-size:30px;line-height:1;font-weight:800;letter-spacing:-.03em;margin:0;
+  }
+  .sub{color:var(--muted);font-size:14px;margin-top:8px}
+
+  nav{
+    position:sticky;top:0;z-index:10;
+    background:linear-gradient(var(--bg) 78%,rgba(16,18,21,0));
+    padding:10px 0 14px;
+    margin:0 -16px;
+  }
+  .chips{
+    display:flex;gap:8px;overflow-x:auto;padding:0 16px 2px;
+    scrollbar-width:none;-webkit-overflow-scrolling:touch;
+  }
+  .chips::-webkit-scrollbar{display:none}
+  .chip{
+    flex:0 0 auto;display:flex;align-items:center;gap:8px;
+    background:var(--surface);border:1px solid var(--line);color:var(--muted);
+    border-radius:999px;padding:10px 15px;font-size:14px;font-weight:600;
+    cursor:pointer;white-space:nowrap;font-family:inherit;
+  }
+  .chip .dot{width:9px;height:9px;border-radius:50%;background:var(--c)}
+  .chip[aria-selected="true"]{
+    color:var(--text);border-color:var(--c);
+    background:color-mix(in srgb,var(--c) 16%,var(--surface));
+  }
+  .chip:focus-visible{outline:2px solid var(--text);outline-offset:2px}
+
+  .day{display:none}
+  .day.on{display:block}
+
+  .dayhead{
+    display:flex;align-items:baseline;gap:10px;
+    padding:6px 0 16px;
+  }
+  .dayhead h2{font-size:21px;font-weight:700;letter-spacing:-.02em;margin:0}
+  .dayhead span{color:var(--muted);font-size:13px}
+
+  .ex{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-left:3px solid var(--c);
+    border-radius:12px;
+    margin-bottom:10px;
+    overflow:hidden;
+  }
+  .top{display:flex;align-items:center;gap:14px;padding:14px 15px}
+  .info{flex:1;min-width:0}
+  .name{font-size:16px;font-weight:600;letter-spacing:-.01em}
+  .target{color:var(--muted);font-size:12.5px;margin-top:3px}
+  .spec{
+    font-size:19px;font-weight:800;letter-spacing:-.02em;
+    font-variant-numeric:tabular-nums;white-space:nowrap;
+  }
+  .spec small{display:block;font-size:11px;font-weight:600;color:var(--muted);letter-spacing:0;text-align:right;margin-top:2px}
+
+  details{border-top:1px solid var(--line)}
+  summary{
+    list-style:none;cursor:pointer;
+    padding:11px 15px;font-size:13.5px;font-weight:600;color:var(--muted);
+  }
+  summary::-webkit-details-marker{display:none}
+  summary:focus-visible{outline:2px solid var(--text);outline-offset:-2px}
+  summary::after{content:"Ocupada? toque aqui";float:right;font-weight:500;opacity:.7}
+  details[open] summary::after{content:"fechar"}
+  .alts{padding:0 15px 14px}
+  .alt{
+    display:flex;gap:10px;align-items:flex-start;
+    font-size:14.5px;color:var(--text);padding:7px 0;
+  }
+  .alt b{color:var(--c);font-weight:800;flex:0 0 auto}
+  .alt span{color:var(--muted)}
+
+  .note{
+    background:var(--surface-2);border-radius:12px;
+    padding:14px 15px;margin-top:16px;font-size:14px;color:var(--muted);
+  }
+  .note b{color:var(--text);font-weight:600}
+
+  .guide h3{
+    font-size:16px;font-weight:700;margin:26px 0 8px;letter-spacing:-.01em;
+  }
+  .guide h3:first-child{margin-top:6px}
+  .guide p{font-size:14.5px;color:var(--muted);margin:0 0 10px}
+  .guide p b{color:var(--text);font-weight:600}
+  .guide ul{margin:0 0 10px;padding-left:18px;color:var(--muted);font-size:14.5px}
+  .guide li{margin-bottom:6px}
+
+  @media (prefers-reduced-motion:no-preference){
+    .chip{transition:background .15s,border-color .15s,color .15s}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Treino 5×</h1>
+  <p class="sub">40–50 min por sessão · 60–90 s de descanso · 2 alternativas por exercício</p>
+</header>
+
+<nav>
+  <div class="chips" role="tablist">
+    <button class="chip" style="--c:var(--d1)" role="tab" aria-selected="true" data-day="d1"><i class="dot"></i>A · Empurrar</button>
+    <button class="chip" style="--c:var(--d2)" role="tab" aria-selected="false" data-day="d2"><i class="dot"></i>B · Pernas</button>
+    <button class="chip" style="--c:var(--d3)" role="tab" aria-selected="false" data-day="d3"><i class="dot"></i>C · Puxar</button>
+    <button class="chip" style="--c:var(--d4)" role="tab" aria-selected="false" data-day="d4"><i class="dot"></i>D · Posterior</button>
+    <button class="chip" style="--c:var(--d5)" role="tab" aria-selected="false" data-day="d5"><i class="dot"></i>E · Ombro e braço</button>
+    <button class="chip" style="--c:var(--dg)" role="tab" aria-selected="false" data-day="guia"><i class="dot"></i>Guia</button>
+  </div>
+</nav>
+
+<!-- DIA A -->
+<section class="day on" id="d1" style="--c:var(--d1)">
+  <div class="dayhead"><h2>Peito, ombro e tríceps</h2><span>segunda</span></div>
+
+  <article class="ex">
+    <div class="top">
+      <div class="info"><div class="name">Supino reto com halteres</div><div class="target">peito</div></div>
+      <div class="spec">3 × 8-12<small>90 s</small></div>
+    </div>
+    <details><summary>Alternativas</summary><div class="alts">
+      <div class="alt"><b>1</b><span>Supino máquina (articulado)</span></div>
+      <div class="alt"><b>2</b><span>Supino inclinado com barra</span></div>
+    </div></details>
+  </article>
+
+  <article class="ex">
+    <div class="top">
+      <div class="info"><div class="name">Desenvolvimento máquina</div><div class="target">ombro anterior</div></div>
+      <div class="spec">3 × 8-12<small>90 s</small></div>
+    </div>
+    <details><summary>Alternativas</summary><div class="alts">
+      <div class="alt"><b>1</b><span>Desenvolvimento com halteres sentado</span></div>
+      <div class="alt"><b>2</b><span>Desenvolvimento no Smith</span></div>
+    </div></details>
+  </article>
+
+  <article class="ex">
+    <div class="top">
+      <div class="info"><div class="name">Crucifixo máquina (peck deck)</div><div class="target">peito</div></div>
+      <div class="spec">3 × 10-15<small>60 s</small></div>
+    </div>
+    <details><summary>Alternativas</summary><div class="alts">
+      <div class="alt"><b>1</b><span>Crossover na polia alta</span></div>
+      <div class="alt"><b>2</b><span>Crucifixo com halteres no banco inclinado</span></div>
+    </div></details>
+  </article>
+
+  <article class="ex">
+    <div class="top">
+      <div class="info"><div class="name">Elevação lateral com halteres</div><div class="target">ombro lateral</div></div>
+      <div class="spec">3 × 12-15<small>60 s</small></div>
+    </div>
+    <details><summary>Alternativas</summary><div class="alts">
+      <div class="alt"><b>1</b><span>Elevação lateral na polia (um braço)</span></div>
+      <div class="alt"><b>2</b><span>Elevação lateral máquina</span></div>
+    </div></details>
+  </article>
+
+  <article class="ex">
+    <div class="top">
+      <div class="info"><div class="name">Tríceps corda na polia</div><div class="target">tríceps</div></div>
+      <div class="spec">3 × 10-15<small>60 s</small></div>
+    </div>
+    <details><summary>Alternativas</summary><div class="alts">
+      <div class="alt"><b>1</b><span>Tríceps barra reta na polia</span></div>
+      <div class="alt"><b>2</b><span>Tríceps francês com halter</span></div>
+    </div></details>
+  </article>
+
+  <article class="ex">
+    <div class="top">
+      <div class="info"><div class="name">Prancha</div><div class="target">core</div></div>
+      <div class="spec">3 × 30-45s<small>45 s</small></div>
+    </div>
+    <details><summary>Alternativas</summary><div class="alts">
+      <div class="alt"><b>1</b><span>Abdominal máquina</span></div>
+      <div class="alt"><b>2</b><span>Dead bug no colchonete</span></div>
+    </div></details>
+  </article>
+
+  <p class="note"><b>Ordem importa pouco</b> se a academia estiver cheia. Faça o que estiver livre, só mantenha o supino entre os dois primeiros — é onde você quer estar mais forte.</p>
+</section>
+
+<!-- DIA B -->
+<section class="day" id="d2" style="--c:var(--d2)">
+  <div class="dayhead"><h2>Pernas, ênfase quadríceps</h2><span>terça</span></div>
+
+  <article class="ex">
+    <div class="top">
+      <div class="info"><div class="name">Leg press 45°</div><div class="target">quadríceps e glúteo</div></div>
+      <div class="spec">3 × 10-12<small>120 s</small></div>
+    </div>
+    <details><summary>Alternativas</summary><div class="alts">
+      <div class="alt"><b>1</b><span>Agachamento hack</span></div>
+      <div class="alt"><b>2</b><span>Agachamento goblet com halter</span></div>
+    </div></details>
+  </article>
+
+  <article class="ex">
+    <div class="top">
+      <div class="info"><div class="name">Cadeira extensora</div><div class="target">quadríceps</div></div>
+      <div class="spec">3 × 12-15<small>60 s</small></div>
+    </div>
+    <details><summary>Alternativas</summary><div class="alts">
+      <div class="alt"><b>1</b><span>Leg press com pés baixos e juntos</span></div>
+      <div class="alt"><b>2</b><span>Agachamento búlgaro (peso do corpo ou halteres)</span></div>
+    </div></details>
+  </article>
+
+  <article class="ex">
+    <div class="top">
+      <div class="info"><div class="name">Mesa flexora</div><div class="target">posterior de coxa</div></div>
+      <div class="spec">3 × 10-12<small>75 s</small></div>
+    </div>
+    <details><summary>Alternativas</summary><div class="alts">
+      <div class="alt"><b>1</b><span>Cadeira flexora</span></div>
+      <div class="alt"><b>2</b><span>Stiff com halteres</span></div>
+    </div></details>
+  </article>
+
+  <article class="ex">
+    <div class="top">
+      <div class="info"><div class="name">Elevação pélvica com barra</div><div class="target">glúteo</div></div>
+      <div class="spec">3 × 10-12<small>75 s</small></div>
+    </div>
+    <details><summary>Alternativas</summary><div class="alts">
+      <div class="alt"><b>1</b><span>Glúteo na máquina</span></div>
+      <div class="alt"><b>2</b><span>Coice na polia baixa</span></div>
+    </div></details>
+  </article>
+
+  <article class="ex">
+    <div class="top">
+      <div class="info"><div class="name">Panturrilha em pé</div><div class="target">panturrilha</div></div>
+      <div class="spec">4 × 12-20<small>45 s</small></div>
+    </div>
+    <details><summary>Alternativas</summary><div class="alts">
+      <div class="alt"><b>1</b><span>Panturrilha sentado</span></div>
+      <div class="alt"><b>2</b><span>Panturrilha no leg press</span></div>
+    </div></details>
+  </article>
+
+  <p class="note"><b>Fecha com 10 min de esteira inclinada</b> em ritmo de conversa. Sem corrida — com 110 kg a caminhada inclinada dá o mesmo gasto com muito menos impacto no joelho.</p>
+</section>
+
+<!-- DIA C -->
+<section class="day" id="d3" style="--c:var(--d3)">
+  <div class="dayhead"><h2>Costas e bíceps</h2><span>quinta</span></div>
+
+  <article class="ex">
+    <div class="top">
+      <div class="info"><div class="name">Puxada frente na polia</div><div class="target">dorsal</div></div>
+      <div class="spec">3 × 8-12<small>90 s</small></div>
+    </div>
+    <details><summary>Alternativas</summary><div class="alts">
+      <div class="alt"><b>1</b><span>Barra fixa assistida (graviton)</span></div>
+      <div class="alt"><b>2</b><span>Puxada com pegada neutra</span></div>
+    </div></details>
+  </article>
+
+  <article class="ex">
+    <div class="top">
+      <div class="info"><div class="name">Remada baixa na polia</div><div class="target">dorsal e trapézio médio</div></div>
+      <div class="spec">3 × 8-12<small>90 s</small></div>
+    </div>
+    <details><summary>Alternativas</summary><div class="alts">
+      <div class="alt"><b>1</b><span>Remada máquina apoiada no peito</span></div>
+      <div class="alt"><b>2</b><span>Remada curvada com halteres</span></div>
+    </div></details>
+  </article>
+
+  <article class="ex">
+    <div class="top">
+      <div class="info"><div class="name">Remada unilateral com halter</div><div class="target">dorsal</div></div>
+      <div class="spec">3 × 10-12<small>75 s</small></div>
+    </div>
+    <details><summary>Alternativas</summary><div class="alts">
+      <div class="alt"><b>1</b><span>Remada cavalinho</span></div>
+      <div class="alt"><b>2</b><span>Pulldown com braço estendido na polia</span></div>
+    </div></details>
+  </article>
+
+  <article class="ex">
+    <div class="top">
+      <div class="info"><div class="name">Crucifixo inverso na máquina</div><div class="target">ombro posterior</div></div>
+      <div class="spec">3 × 12-15<small>60 s</small></div>
+    </div>
+    <details><summary>Alternativas</summary><div class="alts">
+      <div class="alt"><b>1</b><span>Face pull na polia</span></div>
+      <div class="alt"><b>2</b><span>Elevação posterior com halteres inclinado</span></div>
+    </div></details>
+  </article>
+
+  <article class="ex">
+    <div class="top">
+      <div class="info"><div class="name">Rosca direta com barra W</div><div class="target">bíceps</div></div>
+      <div class="spec">3 × 10-12<small>60 s</small></div>
+    </div>
+    <details><summary>Alternativas</summary><div class="alts">
+      <div class="alt"><b>1</b><span>Rosca alternada com halteres</span></div>
+      <div class="alt"><b>2</b><span>Rosca na polia baixa</span></div>
+    </div></details>
+  </article>
+
+  <article class="ex">
+    <div class="top">
+      <div class="info"><div class="name">Rosca martelo</div><div class="target">braquial e antebraço</div></div>
+      <div class="spec">2 × 12-15<small>60 s</small></div>
+    </div>
+    <details><summary>Alternativas</summary><div class="alts">
+      <div class="alt"><b>1</b><span>Rosca inversa com barra</span></div>
+      <div class="alt"><b>2</b><span>Rosca martelo na corda</span></div>
+    </div></details>
+  </article>
+</section>
+
+<!-- DIA D -->
+<section class="day" id="d4" style="--c:var(--d4)">
+  <div class="dayhead"><h2>Pernas, ênfase posterior e glúteo</h2><span>sexta</span></div>
+
+  <article class="ex">
+    <div class="top">
+      <div class="info"><div class="name">Stiff com halteres</div><div class="target">posterior de coxa e glúteo</div></div>
+      <div class="spec">3 × 8-12<small>120 s</small></div>
+    </div>
+    <details><summary>Alternativas</summary><div class="alts">
+      <div class="alt"><b>1</b><span>Levantamento terra romeno com barra</span></div>
+      <div class="alt"><b>2</b><span>Extensão lombar no banco 45°</span></div>
+    </div></details>
+  </article>
+
+  <article class="ex">
+    <div class="top">
+      <div class="info"><div class="name">Agachamento no Smith</div><div class="target">quadríceps e glúteo</div></div>
+      <div class="spec">3 × 10-12<small>120 s</small></div>
+    </div>
+    <details><summary>Alternativas</summary><div class="alts">
+      <div class="alt"><b>1</b><span>Leg press 45°</span></div>
+      <div class="alt"><b>2</b><span>Agachamento goblet com halter</span></div>
+    </div></details>
+  </article>
+
+  <article class="ex">
+    <div class="top">
+      <div class="info"><div class="name">Cadeira flexora</div><div class="target">posterior de coxa</div></div>
+      <div class="spec">3 × 12-15<small>60 s</small></div>
+    </div>
+    <details><summary>Alternativas</summary><div class="alts">
+      <div class="alt"><b>1</b><span>Mesa flexora</span></div>
+      <div class="alt"><b>2</b><span>Flexora unilateral em pé</span></div>
+    </div></details>
+  </article>
+
+  <article class="ex">
+    <div class="top">
+      <div class="info"><div class="name">Passada com halteres</div><div class="target">pernas e estabilidade</div></div>
+      <div class="spec">2 × 10<small>por perna</small></div>
+    </div>
+    <details><summary>Alternativas</summary><div class="alts">
+      <div class="alt"><b>1</b><span>Agachamento búlgaro</span></div>
+      <div class="alt"><b>2</b><span>Subida no banco (step-up)</span></div>
+    </div></details>
+  </article>
+
+  <article class="ex">
+    <div class="top">
+      <div class="info"><div class="name">Abdução de quadril na máquina</div><div class="target">glúteo médio</div></div>
+      <div class="spec">3 × 15-20<small>45 s</small></div>
+    </div>
+    <details><summary>Alternativas</summary><div class="alts">
+      <div class="alt"><b>1</b><span>Abdução na polia baixa</span></div>
+      <div class="alt"><b>2</b><span>Caminhada lateral com miniband</span></div>
+    </div></details>
+  </article>
+
+  <article class="ex">
+    <div class="top">
+      <div class="info"><div class="name">Panturrilha sentado</div><div class="target">panturrilha</div></div>
+      <div class="spec">3 × 15-20<small>45 s</small></div>
+    </div>
+    <details><summary>Alternativas</summary><div class="alts">
+      <div class="alt"><b>1</b><span>Panturrilha em pé na máquina</span></div>
+      <div class="alt"><b>2</b><span>Panturrilha no leg press</span></div>
+    </div></details>
+  </article>
+</section>
+
+<!-- DIA E -->
+<section class="day" id="d5" style="--c:var(--d5)">
+  <div class="dayhead"><h2>Ombro, braço e core</h2><span>sábado</span></div>
+
+  <article class="ex">
+    <div class="top">
+      <div class="info"><div class="name">Desenvolvimento com halteres</div><div class="target">ombro anterior</div></div>
+      <div class="spec">3 × 10-12<small>75 s</small></div>
+    </div>
+    <details><summary>Alternativas</summary><div class="alts">
+      <div class="alt"><b>1</b><span>Desenvolvimento máquina</span></div>
+      <div class="alt"><b>2</b><span>Desenvolvimento Arnold</span></div>
+    </div></details>
+  </article>
+
+  <article class="ex">
+    <div class="top">
+      <div class="info"><div class="name">Elevação lateral</div><div class="target">ombro lateral</div></div>
+      <div class="spec">4 × 12-15<small>45 s</small></div>
+    </div>
+    <details><summary>Alternativas</summary><div class="alts">
+      <div class="alt"><b>1</b><span>Elevação lateral na polia</span></div>
+      <div class="alt"><b>2</b><span>Elevação lateral máquina</span></div>
+    </div></details>
+  </article>
+
+  <article class="ex">
+    <div class="top">
+      <div class="info"><div class="name">Face pull na polia</div><div class="target">ombro posterior e postura</div></div>
+      <div class="spec">3 × 15<small>45 s</small></div>
+    </div>
+    <details><summary>Alternativas</summary><div class="alts">
+      <div class="alt"><b>1</b><span>Crucifixo inverso na máquina</span></div>
+      <div class="alt"><b>2</b><span>Abertura com elástico</span></div>
+    </div></details>
+  </article>
+
+  <article class="ex">
+    <div class="top">
+      <div class="info"><div class="name">Tríceps testa com halteres</div><div class="target">tríceps</div></div>
+      <div class="spec">3 × 10-12<small>60 s</small></div>
+    </div>
+    <details><summary>Alternativas</summary><div class="alts">
+      <div class="alt"><b>1</b><span>Mergulho na máquina</span></div>
+      <div class="alt"><b>2</b><span>Tríceps coice na polia</span></div>
+    </div></details>
+  </article>
+
+  <article class="ex">
+    <div class="top">
+      <div class="info"><div class="name">Rosca scott na máquina</div><div class="target">bíceps</div></div>
+      <div class="spec">3 × 10-12<small>60 s</small></div>
+    </div>
+    <details><summary>Alternativas</summary><div class="alts">
+      <div class="alt"><b>1</b><span>Rosca concentrada</span></div>
+      <div class="alt"><b>2</b><span>Rosca na polia baixa</span></div>
+    </div></details>
+  </article>
+
+  <article class="ex">
+    <div class="top">
+      <div class="info"><div class="name">Abdominal na máquina</div><div class="target">core</div></div>
+      <div class="spec">3 × 12-15<small>45 s</small></div>
+    </div>
+    <details><summary>Alternativas</summary><div class="alts">
+      <div class="alt"><b>1</b><span>Prancha lateral, 3 × 20-30 s de cada lado</span></div>
+      <div class="alt"><b>2</b><span>Elevação de pernas suspenso ou no banco</span></div>
+    </div></details>
+  </article>
+
+  <p class="note"><b>É o dia mais leve.</b> Se a semana pesou, corte a rosca scott e o abdominal e vá embora em 35 min. Melhor treinar cinco vezes de forma sustentável do que quatro perfeitas e uma faltada.</p>
+</section>
+
+<!-- GUIA -->
+<section class="day guide" id="guia" style="--c:var(--dg)">
+  <div class="dayhead"><h2>Como usar</h2></div>
+
+  <h3>Como progredir a carga</h3>
+  <p>Progressão dupla: fique na mesma carga até completar o <b>topo da faixa de repetições em todas as séries</b>, ainda sobrando 1 ou 2 reps. Aí sobe 2,5 kg em exercício de braço/ombro e 5 kg em perna e peito, e volta pro fim de baixo da faixa.</p>
+  <p>Deixar 1–2 reps na reserva é a regra em quase tudo. Falha total só faz sentido na última série de isolador (elevação lateral, rosca, tríceps).</p>
+
+  <h3>Semana</h3>
+  <ul>
+    <li>Seg A · Ter B · Qua descanso · Qui C · Sex D · Sáb E · Dom descanso</li>
+    <li>Se perder um dia, empurra a sequência. Não junte dois treinos.</li>
+    <li>Aquecimento: 5 min de esteira + 1 ou 2 séries leves do primeiro exercício.</li>
+  </ul>
+
+  <h3>Cardio</h3>
+  <ul>
+    <li>Meta de passos: 8 a 10 mil por dia. É o que mais move o ponteiro no gasto calórico.</li>
+    <li>20 a 30 min de caminhada inclinada nos dias de descanso, se der.</li>
+    <li>Sem corrida por enquanto. Volta a ser opção conforme o peso cai.</li>
+  </ul>
+
+  <h3>Nessa fase, o treino tem uma função extra</h3>
+  <p>Emagrecer rápido custa massa magra junto com gordura. O treino de força com carga progressiva é o principal sinal que diz ao corpo pra segurar o músculo — por isso a prioridade aqui é <b>manter a carga subindo</b>, mesmo com a balança caindo.</p>
+  <p>Proteína em todas as refeições ajuda no mesmo objetivo. Com o apetite menor, o risco não é comer demais, é comer pouca proteína sem perceber. Se em algum dia a comida não descer, um shake resolve.</p>
+  <p>Nas primeiras semanas é comum enjoo e menos energia. Se acontecer: mantenha o treino, tire 20% da carga e faça o básico. Voltar leve é melhor que faltar.</p>
+
+  <h3>Vale acompanhar</h3>
+  <p>Reavalie a testosterona com seu médico depois de uns 3 meses — perda de peso e treino de força costumam mexer nesse número, e vale saber se mexeu. Enquanto isso, dormir 7 h ou mais é o que mais ajuda na recuperação.</p>
+
+  <h3>Quando trocar de programa</h3>
+  <p>Rode por 8 a 12 semanas. Quando as cargas travarem por 2 ou 3 semanas seguidas em vários exercícios, é hora de mudar — não antes.</p>
+</section>
+
+</div>
+
+<script>
+  const chips = document.querySelectorAll('.chip');
+  const days = document.querySelectorAll('.day');
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => c.setAttribute('aria-selected', String(c === chip)));
+      days.forEach(d => d.classList.toggle('on', d.id === chip.dataset.day));
+      window.scrollTo({top: 0, behavior: 'instant'});
+      chip.scrollIntoView({block: 'nearest', inline: 'center', behavior: 'smooth'});
+    });
+  });
+
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js').catch(() => {});
+    });
+  }
+</script>
+</body>
+</html>
